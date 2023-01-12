@@ -1,4 +1,21 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+// add to cart button event handler
+/*
+
+async function addToCartHandler(e) {
+  const product = await dataSource.findProductById(e.target.dataset.id);
+  addProductToCart(product);
+  showCartQuantity();
+
+*/
+export function addProductToCart(product) {
+  let cart = getLocalStorage("so-cart");
+  if (cart === null) {
+    cart = [];
+  }
+  cart.push(product);
+  setLocalStorage("so-cart", cart);
+}
 
 // function to Add a superscript number of items
 // in the cart to the backpack icon.

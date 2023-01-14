@@ -1,9 +1,9 @@
-import ProductData from './ProductData.mjs';
-import { getParams} from './utils.mjs';
-import { addProductToCart, showCartQuantity } from './product.js';
+import ProductData from "./ProductData.mjs";
+import { getParams} from "./utils.mjs";
+import { addProductToCart, showCartQuantity } from "./product.js";
 
-const productId = getParams('product');
-const dataSource = new ProductData('tents');
+const productId = getParams("product");
+const dataSource = new ProductData("tents");
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -22,8 +22,8 @@ export default class ProductDetails {
 
         // once the HTML is rendered we can add a listener to Add to Cart button
         // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
-        document.getElementById('addToCart')
-        .addEventListener('click', this.addToCartHandler.bind(this));
+        document.getElementById("addToCart")
+        .addEventListener("click", this.addToCartHandler.bind(this));
     }
     
     async addToCartHandler(e) {
@@ -42,7 +42,7 @@ export default class ProductDetails {
 
     renderProductDetails(){
 
-        let product_string =`<section class="product-detail">
+        let product_string = `<section class="product-detail">
         <h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
         <img
@@ -58,7 +58,7 @@ export default class ProductDetails {
       </div>
       </section>`
 
-      document.getElementById('product_details').innerHTML = product_string;
+      document.getElementById("product_details").innerHTML = product_string;
 
     }
 }

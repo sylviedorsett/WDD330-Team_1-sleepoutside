@@ -1,21 +1,21 @@
 import { renderListWithTemplate } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+//import ProductData from "./ProductData.mjs";
 
 function productCardTemplate(product) {
+    //Use destructoring to enable readable code and pull specific properties from our object
+    const {Id, Image, ListPrice, NameWithoutBrand} = product;
+    const {Name} = product.Brand;
+
     return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
+    <a href="product_pages/?product=${Id}">
       <img
-        src="${product.Image}"
-        alt="Image of ${product.NameWithoutBrand}"
+        src="${Image}"
+        alt="Image of ${NameWithoutBrand}"
       />
-      <h3 class="card__brand">${product.Brand}</h3>
-      <h2 class="card__name">${product.NameWithoutBrand}</h2>
-      <p class="product-card__price">$${product.ListPrice}</p></a>
+      <h3 class="card__brand">${Name}</h3>
+      <h2 class="card__name">${NameWithoutBrand}</h2>
+      <p class="product-card__price">$${ListPrice}</p></a>
   </li>`
-}
-
-function filterProductList( ){
-
 }
 
 // class to generate list of product cards

@@ -1,4 +1,5 @@
 import { renderListWithTemplate } from "./utils.mjs";
+import ProductData from "./ProductData.mjs";
 
 function productCardTemplate(product) {
     return `<li class="product-card">
@@ -11,6 +12,10 @@ function productCardTemplate(product) {
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
       <p class="product-card__price">$${product.ListPrice}</p></a>
   </li>`
+}
+
+function filterProductList( ){
+
 }
 
 // class to generate list of product cards

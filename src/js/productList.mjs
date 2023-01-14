@@ -31,11 +31,11 @@ export default class productListing {
         let productsArray = await this.dataSource.getData();
         let filterdArray = this.filterProductList(productsArray);
         console.log(filterdArray);
-        this.renderList(filterdArray);
+        this.renderList(productCardTemplate, filterdArray);
     }
 
-    renderList(list) {
-        renderListWithTemplate(productCardTemplate, this.listElement, list)
+    renderList(template, list) {
+        renderListWithTemplate(template, this.listElement, list)
     }
 
     filterProductList(list) {

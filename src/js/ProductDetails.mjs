@@ -40,7 +40,8 @@ export default class ProductDetails {
         setLocalStorage("so-cart", cart);
       }*/
 
-    renderProductDetails(){
+      renderProductDetails(){
+        let discount = Math.trunc(this.calc_discount());
 
         let product_string =`<section class="product-detail">
         <h3>${this.product.Brand.Name}</h3>
@@ -50,7 +51,8 @@ export default class ProductDetails {
           src="${this.product.Image}"
           alt="${this.product.Name}"
         />
-        <p class="product-card__price">$${this.product.ListPrice}</p>
+        <p class="discount">Sale: ${discount}% Off</p>
+        <p class="product-card__price">Was: <strike>$${this.product.SuggestedRetailPrice}</strike> Now: $${this.product.ListPrice}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
@@ -59,7 +61,10 @@ export default class ProductDetails {
       </section>`
 
       document.getElementById('product_details').innerHTML = product_string;
+    }
 
+    calc_discount() {
+      return 100 - this.product.ListPrice / this.product.SuggestedRetailPrice*100;
     }
 }
     

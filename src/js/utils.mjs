@@ -34,7 +34,7 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   const ListArrayHtml = list.map(templateFn);
   if (clear) {
     parentElement.innerHTML = "";
-  } else {
+  } else { // in the teachers it shows this piece of code to always run, in other words, there is no else or brackets *just noting in case it is relevant later or we get some kind of error if the above if statement with clear comes back true*
     parentElement.insertAdjacentHTML(position, ListArrayHtml.join(""));
   }
 }

@@ -31,16 +31,20 @@ export default class productListing {
         let productsArray = await this.dataSource.getData();
         let filterdArray = this.filterProductList(productsArray);
         console.log(filterdArray);
-        this.renderList(filterdArray);
+        this.renderList(productCardTemplate, filterdArray);
     }
 
-    renderList(list) {
-        renderListWithTemplate(productCardTemplate, this.listElement, list)
+    renderList(template, list) {
+        renderListWithTemplate(template, this.listElement, list)
     }
 
+    // *sidenote - What if we made a random generator to choose 4 products for us each time, that way we would see some of the other products available, though we will likely be building a search area later, for now I just feel bad we only ever get to see 4 of our products listed. ANy thoughts on the random generator for the 4 chosen?
+    // example code: var randomNum = Math.floor(Math.random() * ((list.length + 1) - 4)); return list.slice(randomNum, randomNum + 4);
+    // I have tested the above code and it works nicely.
     filterProductList(list) {
       // return list of product whose index is less than 4 
       // from the list of all tents/products.
       return list.filter((item, index) => index < 4)
+      
     }   
 }

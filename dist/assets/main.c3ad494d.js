@@ -1,4 +1,4 @@
-import{r as o}from"./utils.b4a38d3e.js";function i(e){if(e.ok)return e.json();throw new Error("Bad Response")}class n{constructor(t){this.category=t,this.path=`../json/${this.category}.json`}getData(){return fetch(this.path).then(i).then(t=>t)}async findProductById(t){return(await this.getData()).find(s=>s.Id===t)}}function d(e){const{Id:t,Image:r,ListPrice:s,NameWithoutBrand:a}=e,{Name:c}=e.Brand;return`<li class="product-card">
+import{r as o}from"./utils.0cdcb80d.js";function i(e){if(e.ok)return e.json();throw new Error("Bad Response")}class n{constructor(t){this.category=t,this.path=`../json/${this.category}.json`}getData(){return fetch(this.path).then(i).then(t=>t)}async findProductById(t){return(await this.getData()).find(s=>s.Id===t)}}function d(e){const{Id:t,Image:r,ListPrice:s,NameWithoutBrand:a}=e,{Name:c}=e.Brand;return`<li class="product-card">
     <a href="product_pages/?product=${t}">
       <img
         src="${r}"

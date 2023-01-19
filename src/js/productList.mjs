@@ -30,7 +30,7 @@ export default class productListing {
     async init() {
         let productsArray = await this.dataSource.getData();
         let filterdArray = this.filterProductList(productsArray);
-        console.log(filterdArray);
+        // console.log(filterdArray);
         this.renderList(productCardTemplate, filterdArray);
     }
 
@@ -44,7 +44,9 @@ export default class productListing {
     filterProductList(list) {
       // return list of product whose index is less than 4 
       // from the list of all tents/products.
-      return list.filter((item, index) => index < 4)
+      var randomNum = Math.floor(Math.random() * ((list.length + 1) - 4));
+      return list.slice(randomNum, randomNum + 4);
+
       
     }   
 }

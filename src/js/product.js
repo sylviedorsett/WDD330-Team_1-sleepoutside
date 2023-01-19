@@ -16,6 +16,7 @@ export function addProductToCart(product) {
   cart.push(product);
   setLocalStorage("so-cart", cart);
 }
+
 export function removeProductFromCart() {
   // paste code here
 }
@@ -33,6 +34,7 @@ export function showCartQuantity() {
   if (cart) {
     cartQuantityElement.textContent = cart.length;
     cartQuantityElement.style.display = "block";
+    
   } else {
     cartQuantityElement.style.display = "none";
   }

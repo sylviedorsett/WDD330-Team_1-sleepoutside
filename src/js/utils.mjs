@@ -1,3 +1,5 @@
+import { showCartQuantity } from "./product";
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -37,4 +39,32 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   } else { // in the teachers it shows this piece of code to always run, in other words, there is no else or brackets *just noting in case it is relevant later or we get some kind of error if the above if statement with clear comes back true*
     parentElement.insertAdjacentHTML(position, ListArrayHtml.join(""));
   }
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if(callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  let response = await fetch(path);
+  if(response.ok) {
+    let text = await response.text()
+    return text;
+  } else {
+    throw new Error("Failed to load path.")
+  }
+}
+
+
+export async function loadHeaderFooter() {
+  let headerContent = await loadTemplate('../public/partials/header.html');
+  let footerContent = await loadTemplate('../public/partials/footer.html');
+  let headerElement = document.querySelector('#header');
+  let footerElement = document.querySelector('#footer');
+  renderWithTemplate(headerContent, headerElement);
+  renderWithTemplate(footerContent, footerElement);
+  showCartQuantity();
 }

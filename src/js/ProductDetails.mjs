@@ -34,15 +34,12 @@ export default class ProductDetails {
         addProductToCart(product);
         showCartQuantity();
     }
-    /*addProductToCart(product) {
-        let cart = getLocalStorage("so-cart");
-        if (cart === null) {
-          cart = [];
-        }
-        cart.push(product);
-        setLocalStorage("so-cart", cart);
-      }*/
-
+    
+    async removeFromCartHandler(e) {
+      const product = await dataSource.findProductById(e.target.dataset.id);
+        removeProductFromCart(product);
+        showCartQuantity();
+    }
 
 
       renderProductDetails(){

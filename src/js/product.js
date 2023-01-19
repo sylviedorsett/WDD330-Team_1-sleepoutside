@@ -34,7 +34,6 @@ export function showCartQuantity() {
   if (cart) {
     cartQuantityElement.textContent = cart.length;
     cartQuantityElement.style.display = "block";
-    
   } else {
     cartQuantityElement.style.display = "none";
   }

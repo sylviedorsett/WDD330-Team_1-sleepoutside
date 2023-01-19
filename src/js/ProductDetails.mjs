@@ -34,6 +34,7 @@ export default class ProductDetails {
         addProductToCart(product);
         showCartQuantity();
     }
+    
     async removeFromCartHandler(e) {
       const product = await dataSource.findProductById(e.target.dataset.id);
         removeProductFromCart(product);

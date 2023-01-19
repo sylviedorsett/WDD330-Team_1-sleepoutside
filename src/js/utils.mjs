@@ -64,7 +64,7 @@ export async function loadHeaderFooter() {
   let footerContent = await loadTemplate('../public/partials/footer.html');
   let headerElement = document.querySelector('#header');
   let footerElement = document.querySelector('#footer');
-  // let callback = showCartQuantity();
-  renderWithTemplate(headerContent, headerElement, showCartQuantity);
-  renderWithTemplate(footerContent, footerElement, showCartQuantity);
+  renderWithTemplate(headerContent, headerElement);
+  renderWithTemplate(footerContent, footerElement);
+  showCartQuantity();
 }

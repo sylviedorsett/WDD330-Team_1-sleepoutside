@@ -4,7 +4,7 @@ import { getParams} from "./utils.mjs";
 import { addProductToCart, showCartQuantity } from "./product.js";
 
 const productId = getParams("product");
-const dataSource = new ProductData("tents");
+const dataSource = new ProductData();
 
 
 export default class ProductDetails {
@@ -54,7 +54,7 @@ export default class ProductDetails {
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
         <img
           class="divider"
-          src="${this.product.Image}"
+          src="${this.product.Images.PrimaryLarge}"
           alt="${this.product.Name}"
         />
 

@@ -3,13 +3,13 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
     //Use destructoring to enable readable code and pull specific properties from our object
-    const {Id, Image, ListPrice, NameWithoutBrand} = product;
+    const {Id, Images, ListPrice, NameWithoutBrand} = product;
     const {Name} = product.Brand;
 
     return `<li class="product-card">
-    <a href="product_pages/?product=${Id}">
-      <img
-        src="${Image}"
+    <a href="/product_pages/index.html?product=${Id}">
+      <img class="card__image"
+        src="${Images.PrimarySmall}"
         alt="Image of ${NameWithoutBrand}"
       />
       <h3 class="card__brand">${Name}</h3>
@@ -28,14 +28,16 @@ export default class productListing {
     }
 
     async init() {
-        let productsArray = await this.dataSource.getData();
-        let filterdArray = this.filterProductList(productsArray);
-        console.log(filterdArray);
-        this.renderList(productCardTemplate, filterdArray);
+        let productsArray = await this.dataSource.getData(this.category);
+        // let filterdArray = this.filterProductList(productsArray);
+        
+        this.renderList(productsArray);
+        document.querySelector(".title").innerHTML = this.category[0].toUpperCase() + this.category.substring(1);
+        
     }
 
-    renderList(template, list) {
-        renderListWithTemplate(template, this.listElement, list)
+    renderList(list) {
+        renderListWithTemplate(productCardTemplate, this.listElement, list)
     }
 
     // *sidenote - What if we made a random generator to choose 4 products for us each time, that way we would see some of the other products available, though we will likely be building a search area later, for now I just feel bad we only ever get to see 4 of our products listed. ANy thoughts on the random generator for the 4 chosen?

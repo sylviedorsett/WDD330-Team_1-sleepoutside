@@ -22,16 +22,25 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function getParams() {
+export function getParams(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product")
+  const product = urlParams.get(param)
   
   return product;
 }
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
   const ListArrayHtml = list.map(templateFn);
+  if (clear) {
+    parentElement.innerHTML = "";
+  }  // in the teachers it shows this piece of code to always run, in other words, there is no else or brackets *just noting in case it is relevant later or we get some kind of error if the above if statement with clear comes back true*
+    parentElement.insertAdjacentHTML(position, ListArrayHtml.join(""));
+  
+}
+
+export function renderWithTemplate(templateFn, parentElement, data, position = "afterbegin", clear = false) {
+  const ListArrayHtml = templateFn(data);
   if (clear) {
     parentElement.innerHTML = "";
   } else { // in the teachers it shows this piece of code to always run, in other words, there is no else or brackets *just noting in case it is relevant later or we get some kind of error if the above if statement with clear comes back true*

@@ -1,16 +1,16 @@
 class Alert {
-    constructor() {
-      this.alertList = document.createElement("section");
-      this.alertList.classList.add("alert-list");
-    }
+  constructor() {
+    this.alertList = document.createElement("section");
+    this.alertList.classList.add("alert-list");
+  }
 
-    async fetchAlerts() {
-      const response = await fetch("../public/json/alert.json");
-      const json = await response.json();
-      return json;
-    }
+  async fetchAlerts() {
+    const response = await fetch("/json/alert.json");
+    const json = await response.json();
+    return json;
+  }
 
-    // constructor and fetchAlerts method
+  // constructor and fetchAlerts method
   async create() {
     const alerts = await this.fetchAlerts();
     alerts.alerts.forEach((alert) => {
@@ -22,13 +22,12 @@ class Alert {
       this.alertList.appendChild(alertItem);
     });
     const main = document.querySelector("main");
-    if(main) {
+    if (main) {
       main.prepend(this.alertList);
     }
   }
 }
 
 // export default Alert;
-const alerts = new Alert();
-alerts.create();
-
+const newAlerts = new Alert();
+newAlerts.create();

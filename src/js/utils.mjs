@@ -60,8 +60,8 @@ export async function loadTemplate(path) {
 
 
 export async function loadHeaderFooter() {
-  let headerContent = await loadTemplate('../public/partials/header.html');
-  let footerContent = await loadTemplate('../public/partials/footer.html');
+  let headerContent = await loadTemplate('/partials/header.html');
+  let footerContent = await loadTemplate('/partials/footer.html');
   let headerElement = document.querySelector('#header');
   let footerElement = document.querySelector('#footer');
   renderWithTemplate(headerContent, headerElement);

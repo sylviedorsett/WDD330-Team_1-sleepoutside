@@ -16,6 +16,7 @@ export function addProductToCart(product) {
   cart.push(product);
   setLocalStorage("so-cart", cart);
 }
+
 export function removeProductFromCart() {
   // paste code here
 }

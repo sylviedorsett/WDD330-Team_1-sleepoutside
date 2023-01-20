@@ -61,5 +61,30 @@ export default class ShoppingCart {
       return newItem;
     }
    
+    removeFromCart(productId) {
+      // find the id in the local storage "so-cart" object and remove the first one with the same id as given
+      
+      // for testing purposes, delete later
+      console.log(JSON.parse(localStorage.getItem("so-cart")));
+      // function to delete when match is found
+      function rem(itemInCart, idToDelete) {
+        if(itemInCart['Id'] === idToDelete) { console.log(ar.splice(ar.indexOf(itemInCart), 1));}
+      }
+      // variable to hold the array of items in cart
+      let ar = JSON.parse(localStorage.getItem("so-cart"));
+      // loop to find match
+      ar.forEach(itemInCart => (rem(itemInCart, productId)));
+      // set local storage to new array
+      setLocalStorage("so-cart", ar)
+      // render the cart again now that the item is removed
+      renderCartContents();
+      
+    
+    }
+    // window.document. do I have to declare global variable? How can I do this?
+    
+    // let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
+    // deleteBtns.forEach(item => {item.addEventListener('click', removeFromCart(`${item.value}`))}); // removeFromCart(`${item.value}`) replaced by console.log()
+    // document.querySelectorAll(".cart-card_delete_btn").forEach(item => {console.log(item.value)});
     
 }

@@ -55,6 +55,7 @@ export default class ShoppingCart {
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
       <p class="cart-card__quantity">qty: 1</p>
+      <button class="cart-card_delete_btn">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>`;
     

@@ -12,6 +12,7 @@ export default class ProductDetails {
         this.productId = productId;
         this.product = {};
         this.dataSource = dataSource;
+        this.show = false;
     }
 
 
@@ -30,22 +31,20 @@ export default class ProductDetails {
     }
     
     async addToCartHandler(e) {
+        this.play();
         const product = await dataSource.findProductById(e.target.dataset.id);
         addProductToCart(product);
         showCartQuantity();
     }
-    /*addProductToCart(product) {
-        let cart = getLocalStorage("so-cart");
-        if (cart === null) {
-          cart = [];
-        }
-        cart.push(product);
-        setLocalStorage("so-cart", cart);
-      }*/
+    
+    async removeFromCartHandler(e) {
+      const product = await dataSource.findProductById(e.target.dataset.id);
+        removeProductFromCart(product);
+        showCartQuantity();
+    }
 
 
-
-      renderProductDetails(){
+    renderProductDetails(){
         let discount = Math.trunc(this.calc_discount());
 
         let product_string =`<section class="product-detail">
@@ -68,17 +67,29 @@ export default class ProductDetails {
       </div>
       </section>`
 
-
       document.getElementById("product_details").innerHTML = product_string;
-
-
+      
     }
 
     calc_discount() {
       return 100 - this.product.ListPrice / this.product.SuggestedRetailPrice*100;
 
     }
+
+    play() {
+      const cart = document.querySelector('.cart');
+      cart.classList.add('cart-animate');
+      this.stop();
+    }
+
+    stop() {
+      const cart = document.querySelector('.cart')
+      cart.addEventListener('animationend', function(){cart.classList.remove('cart-animate');});
+    }
 }
     
 const product = new ProductDetails(productId, dataSource);
 product.init();
+
+
+

@@ -1,5 +1,4 @@
-import {setLocalStorage, getLocalStorage} from "./utils.mjs";
-import { showCartQuantity } from "./cart.js";
+import {setLocalStorage, getLocalStorage, showCartQuantity} from "./utils.mjs";
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -31,15 +30,15 @@ export default class ProductDetails {
       //animate icon
       this.play();
       //get product
-      const product = await dataSource.findProductById(e.target.dataset.id);
+      const product = await this.dataSource.findProductById(e.target.dataset.id);
       //add product to cart
-      addProductToCart(product);
+      this.addProductToCart(product);
       //update icon superscript
       showCartQuantity();
     }
     
     async removeFromCartHandler(e) {
-      const product = await dataSource.findProductById(e.target.dataset.id);
+      const product = await this.dataSource.findProductById(e.target.dataset.id);
       removeProductFromCart(product);
       showCartQuantity();
     }
@@ -52,7 +51,7 @@ export default class ProductDetails {
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
       <img class="divider"
-        src="${this.product.Image}"
+        src="${this.product.Images.PrimaryMedium}"
         alt="${this.product.Name}"/>
       <p class="discount">Sale: ${discount}% Off</p>
       <p class="product-card__price">Was: <strike>$${this.product.SuggestedRetailPrice}</strike> Now: $${this.product.ListPrice}</p>

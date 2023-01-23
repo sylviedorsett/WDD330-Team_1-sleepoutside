@@ -1,5 +1,3 @@
-import { showCartQuantity } from "./cart";
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -63,4 +61,20 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerContent, headerElement);
   renderWithTemplate(footerContent, footerElement);
   showCartQuantity();
+}
+
+// function to Add a superscript number of items
+// in the cart to the backpack icon.
+export function showCartQuantity() {
+  let new_cart = getLocalStorage("so-cart");
+  // select the div element I (prince) added to the all the html docs.
+  let cartQuantityElement = document.querySelector("#cart-items-number");
+  // Set the superscript to the number of items in the cart 'IF'
+  // there is an item in the cart.
+  if (new_cart) {
+    cartQuantityElement.textContent = new_cart.length;
+    cartQuantityElement.style.display = "block";
+  } else {
+    cartQuantityElement.style.display = "none";
+  }
 }

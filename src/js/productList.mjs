@@ -2,13 +2,11 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
     //Use destructoring to enable readable code and pull specific properties from our object
-    const {Id, Image, ListPrice, NameWithoutBrand} = product;
-    const {Name} = product.Brand;
-
+    const {Id, Images, Name, ListPrice, NameWithoutBrand} = product;
     return `<li class="product-card">
-    <a href="product_pages/?product=${Id}">
+    <a href="/product_pages/index.html?product=${Id}">
       <img
-        src="${Image}"
+        src="${Images.PrimarySmall}"
         alt="Image of ${NameWithoutBrand}"
       />
       <h3 class="card__brand">${Name}</h3>
@@ -30,7 +28,7 @@ export default class productList {
         //let filterdArray = this.filterProductList(productList);
         this.renderList(productList);
         //set title to current category
-        document.querySelector(".title").innerHTML = this.category;
+        document.querySelector(".title").innerHTML = this.category[0].toUpperCase() + this.category.substring(1)
     }
 
     renderList(productList) {

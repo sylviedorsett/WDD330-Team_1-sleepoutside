@@ -8,7 +8,6 @@ export default class ShoppingCart {
 
     renderCartContents() {
       const cartItems = getLocalStorage("so-cart");
-      console.log(cartItems);
       const htmlItems = cartItems.map((item) => this.cartItemTemplate(item));
     
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
@@ -20,7 +19,7 @@ export default class ShoppingCart {
       const newItem = `<li class="cart-card divider">
       <a href="#" class="cart-card__image">
         <img
-          src="${item.Image}"
+          src="${item.Images.PrimarySmall}"
           alt="${item.Name}"
         />
       </a>

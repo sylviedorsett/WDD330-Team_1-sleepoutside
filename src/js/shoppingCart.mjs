@@ -8,13 +8,32 @@ export default class ShoppingCart {
 
     renderCartContents() {
       const cartItems = getLocalStorage("so-cart");
-      
       const htmlItems = cartItems.map((item) => this.cartItemTemplate(item));
     
-      document.querySelector(".product-list").innerHTML = htmlItems.join("");
+      document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       this.cartTotal();
     }
 
+    //function to create template
+    cartItemTemplate(item) {
+      const newItem = `<li class="cart-card divider">
+      <a href="#" class="cart-card__image">
+        <img
+          src="${item.Images.PrimarySmall}"
+          alt="${item.Name}"
+        />
+      </a>
+      <a href="#">
+        <h2 class="card__name">${item.Name}</h2>
+      </a>
+      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+      <p class="cart-card__quantity">qty: 1</p>
+      <p class="cart-card__price">$${item.FinalPrice}</p>
+    </li>`;
+    
+      return newItem;
+    }
+   
     //The cartTotal function calculates the sum of the cost of items in the cart
     cartTotal() {
       //save the items array in local storage to the variable 'cart'
@@ -40,26 +59,4 @@ export default class ShoppingCart {
         document.querySelector(".hide-total").style.display = "none";
       }
     }
-
-    //function to create template
-    cartItemTemplate(item) {
-      const newItem = `<li class="cart-card divider">
-      <a href="#" class="cart-card__image">
-        <img
-          src="${item.Image}"
-          alt="${item.Name}"
-        />
-      </a>
-      <a href="#">
-        <h2 class="card__name">${item.Name}</h2>
-      </a>
-      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: 1</p>
-      <p class="cart-card__price">$${item.FinalPrice}</p>
-    </li>`;
-    
-      return newItem;
-    }
-   
-    
 }

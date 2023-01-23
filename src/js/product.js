@@ -17,10 +17,6 @@ export function addProductToCart(product) {
   setLocalStorage("so-cart", cart);
 }
 
-export function removeProductFromCart() {
-  // paste code here
-}
-
 // function to Add a superscript number of items
 // in the cart to the backpack icon.
 export function showCartQuantity() {

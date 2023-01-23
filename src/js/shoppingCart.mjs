@@ -1,4 +1,5 @@
-import { getLocalStorage } from "./utils.mjs"; 
+import { getLocalStorage, setLocalStorage } from "./utils.mjs"; 
+import { showCartQuantity } from "./product.js";
 
 export default class ShoppingCart {
     constructor(key, parentSelector) {
@@ -13,6 +14,11 @@ export default class ShoppingCart {
     
       document.querySelector(".product-list").innerHTML = htmlItems.join("");
       this.cartTotal();
+      let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
+      deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
+      // let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
+      // deleteBtns.forEach(item => {item.addEventListener('click', this.removeProductFromCart(`${item.value}`))}); // removeFromCart(`${item.value}`) replaced by console.log()
+      // document.querySelectorAll(".cart-card_delete_btn").forEach(item => {"2", console.log(item.value)});
     }
 
     //The cartTotal function calculates the sum of the cost of items in the cart
@@ -55,37 +61,35 @@ export default class ShoppingCart {
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
       <p class="cart-card__quantity">qty: 1</p>
-      <button class="cart-card_delete_btn">X</button>
+      <button class="cart-card_delete_btn" value="${item.Id}">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>`;
     
       return newItem;
     }
    
-    removeFromCart(productId) {
+    removeProductFromCart(productId) {
       // find the id in the local storage "so-cart" object and remove the first one with the same id as given
-      
+      console.log(productId);
       // for testing purposes, delete later
-      console.log(JSON.parse(localStorage.getItem("so-cart")));
+      console.log("1", JSON.parse(localStorage.getItem("so-cart")));
       // function to delete when match is found
       function rem(itemInCart, idToDelete) {
-        if(itemInCart['Id'] === idToDelete) { console.log(ar.splice(ar.indexOf(itemInCart), 1));}
+        if(itemInCart['Id'] === idToDelete) { console.log(ar.splice(ar.indexOf(itemInCart), 1)); return true;
+        } else { return false;}
       }
       // variable to hold the array of items in cart
       let ar = JSON.parse(localStorage.getItem("so-cart"));
       // loop to find match
-      ar.forEach(itemInCart => (rem(itemInCart, productId)));
+      for (const itemInCart of ar){ if(rem(itemInCart, productId)){break;}};
       // set local storage to new array
       setLocalStorage("so-cart", ar)
       // render the cart again now that the item is removed
-      renderCartContents();
+      this.renderCartContents();
+      showCartQuantity();
       
     
     }
-    // window.document. do I have to declare global variable? How can I do this?
     
-    // let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
-    // deleteBtns.forEach(item => {item.addEventListener('click', removeFromCart(`${item.value}`))}); // removeFromCart(`${item.value}`) replaced by console.log()
-    // document.querySelectorAll(".cart-card_delete_btn").forEach(item => {console.log(item.value)});
     
 }

@@ -50,7 +50,7 @@ export default class ProductDetails {
       let product_string =`<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-      <img class="divider"
+      <img class="divider product_img"
         src="${this.product.Images.PrimaryMedium}"
         alt="${this.product.Name}"/>
       <p class="discount">Sale: ${discount}% Off</p>

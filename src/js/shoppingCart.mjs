@@ -1,4 +1,5 @@
-import { getLocalStorage } from "./utils.mjs"; 
+import { getLocalStorage, setLocalStorage } from "./utils.mjs"; 
+import { showCartQuantity } from "./utils.js";
 
 export default class ShoppingCart {
     constructor(key, parentSelector) {
@@ -12,6 +13,9 @@ export default class ShoppingCart {
     
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       this.cartTotal();
+      let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
+      deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
+      
     }
 
     //function to create template
@@ -28,6 +32,7 @@ export default class ShoppingCart {
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
       <p class="cart-card__quantity">qty: 1</p>
+      <button class="cart-card_delete_btn" value="${item.Id}">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>`;
     
@@ -58,5 +63,23 @@ export default class ShoppingCart {
         //hide element
         document.querySelector(".hide-total").style.display = "none";
       }
+    }
+
+    removeProductFromCart(productId) {
+      // find the id in the local storage "so-cart" object and remove the first one with the same id as given
+      // function to delete when match is found
+      function rem(itemInCart, idToDelete) {
+        if(itemInCart['Id'] === idToDelete) { (ar.splice(ar.indexOf(itemInCart), 1)); return true;
+        } else { return false;}
+      }
+      // variable to hold the array of items in cart
+      let ar = JSON.parse(localStorage.getItem("so-cart"));
+      // loop to find match
+      for (const itemInCart of ar){ if(rem(itemInCart, productId)){break;}};
+      // set local storage to new array
+      setLocalStorage("so-cart", ar)
+      // render the cart again now that the item is removed
+      this.renderCartContents();
+      showCartQuantity();
     }
 }

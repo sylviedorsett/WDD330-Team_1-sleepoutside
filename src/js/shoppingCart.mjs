@@ -1,5 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs"; 
-import { showCartQuantity } from "./utils.js";
+import { getLocalStorage, setLocalStorage, showCartQuantity } from "./utils.mjs"; 
 
 export default class ShoppingCart {
     constructor(key, parentSelector) {

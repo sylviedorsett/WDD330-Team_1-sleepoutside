@@ -1,15 +1,12 @@
 import { renderListWithTemplate } from "./utils.mjs";
-//import ProductData from "./ProductData.mjs";
 
 function productCardTemplate(product) {
     //Use destructoring to enable readable code and pull specific properties from our object
-    const {Id, Image, ListPrice, NameWithoutBrand} = product;
-    const {Name} = product.Brand;
-
+    const {Id, Images, Name, ListPrice, NameWithoutBrand} = product;
     return `<li class="product-card">
-    <a href="product_pages/?product=${Id}">
+    <a href="/product_pages/index.html?product=${Id}">
       <img
-        src="${Image}"
+        src="${Images.PrimarySmall}"
         alt="Image of ${NameWithoutBrand}"
       />
       <h3 class="card__brand">${Name}</h3>
@@ -18,9 +15,8 @@ function productCardTemplate(product) {
   </li>`
 }
 
-// class to generate list of product cards
-// in HTML from an array.
-export default class productListing {
+export default class productList {
+// class to generate list of product card in HTML from an array.
     constructor(category, dataSource, listElement) {
         this.category = category;
         this.dataSource = dataSource;
@@ -28,14 +24,15 @@ export default class productListing {
     }
 
     async init() {
-        let productsArray = await this.dataSource.getData();
-        let filterdArray = this.filterProductList(productsArray);
-        // console.log(filterdArray);
-        this.renderList(productCardTemplate, filterdArray);
+        const productList = await this.dataSource.getData(this.category);
+        //let filterdArray = this.filterProductList(productList);
+        this.renderList(productList);
+        //set title to current category
+        document.querySelector(".title").innerHTML = this.category[0].toUpperCase() + this.category.substring(1)
     }
 
-    renderList(template, list) {
-        renderListWithTemplate(template, this.listElement, list)
+    renderList(productList) {
+        renderListWithTemplate(productCardTemplate, this.listElement, productList)
     }
 
     filterProductList(list) {
@@ -43,7 +40,6 @@ export default class productListing {
       // from the list of all tents/products.
       var randomNum = Math.floor(Math.random() * ((list.length + 1) - 4));
       return list.slice(randomNum, randomNum + 4);
-
-      
     }   
+    
 }

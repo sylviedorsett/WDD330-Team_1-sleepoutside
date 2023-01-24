@@ -1,5 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs"; 
-import { showCartQuantity } from "./product.js";
+import { showCartQuantity } from "./utils.js";
 
 export default class ShoppingCart {
     constructor(key, parentSelector) {
@@ -9,18 +9,36 @@ export default class ShoppingCart {
 
     renderCartContents() {
       const cartItems = getLocalStorage("so-cart");
-      
       const htmlItems = cartItems.map((item) => this.cartItemTemplate(item));
     
-      document.querySelector(".product-list").innerHTML = htmlItems.join("");
+      document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       this.cartTotal();
       let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
       deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
-      // let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
-      // deleteBtns.forEach(item => {item.addEventListener('click', this.removeProductFromCart(`${item.value}`))}); // removeFromCart(`${item.value}`) replaced by console.log()
-      // document.querySelectorAll(".cart-card_delete_btn").forEach(item => {"2", console.log(item.value)});
+      
     }
 
+    //function to create template
+    cartItemTemplate(item) {
+      const newItem = `<li class="cart-card divider">
+      <a href="#" class="cart-card__image">
+        <img
+          src="${item.Images.PrimarySmall}"
+          alt="${item.Name}"
+        />
+      </a>
+      <a href="#">
+        <h2 class="card__name">${item.Name}</h2>
+      </a>
+      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+      <p class="cart-card__quantity">qty: 1</p>
+      <button class="cart-card_delete_btn" value="${item.Id}">X</button>
+      <p class="cart-card__price">$${item.FinalPrice}</p>
+    </li>`;
+    
+      return newItem;
+    }
+   
     //The cartTotal function calculates the sum of the cost of items in the cart
     cartTotal() {
       //save the items array in local storage to the variable 'cart'
@@ -47,35 +65,11 @@ export default class ShoppingCart {
       }
     }
 
-    //function to create template
-    cartItemTemplate(item) {
-      const newItem = `<li class="cart-card divider">
-      <a href="#" class="cart-card__image">
-        <img
-          src="${item.Image}"
-          alt="${item.Name}"
-        />
-      </a>
-      <a href="#">
-        <h2 class="card__name">${item.Name}</h2>
-      </a>
-      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: 1</p>
-      <button class="cart-card_delete_btn" value="${item.Id}">X</button>
-      <p class="cart-card__price">$${item.FinalPrice}</p>
-    </li>`;
-    
-      return newItem;
-    }
-   
     removeProductFromCart(productId) {
       // find the id in the local storage "so-cart" object and remove the first one with the same id as given
-      console.log(productId);
-      // for testing purposes, delete later
-      console.log("1", JSON.parse(localStorage.getItem("so-cart")));
       // function to delete when match is found
       function rem(itemInCart, idToDelete) {
-        if(itemInCart['Id'] === idToDelete) { console.log(ar.splice(ar.indexOf(itemInCart), 1)); return true;
+        if(itemInCart['Id'] === idToDelete) { (ar.splice(ar.indexOf(itemInCart), 1)); return true;
         } else { return false;}
       }
       // variable to hold the array of items in cart
@@ -87,9 +81,5 @@ export default class ShoppingCart {
       // render the cart again now that the item is removed
       this.renderCartContents();
       showCartQuantity();
-      
-    
     }
-    
-    
 }

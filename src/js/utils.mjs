@@ -78,3 +78,4 @@ export function showCartQuantity() {
     cartQuantityElement.style.display = "none";
   }
 }
+

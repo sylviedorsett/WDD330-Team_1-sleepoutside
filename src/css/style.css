@@ -309,6 +309,35 @@ button {
   }
 }
 
+/**/
+.breadcrumbs {
+  padding: 0;
+  margin: 1em;
+}
+.breadcrumbs_item {
+  display: inline-block;
+  color:gray;
+}
+
+.breadcrumbs_item:not(:last-of-type)::after {
+  content: '>';
+  margin: 0 .5em;
+  color: gray;
+}
+
+.breadcrumbs_link {
+  text-decoration: none;
+  color: gray;
+}
+
+.breadcrumbs_link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs_link:active {
+  color: rgb(4, 91, 132);
+  font-weight: 500;
+}
 
 footer {
   font-size: var(--small-font);

@@ -5,16 +5,24 @@ export default class ProductDetails {
       this.productId = productId;
       this.product = {};
       this.dataSource = dataSource;
+      this.url = document.URL;
     }
 
     async init() {
       //get details for current product
       this.product = await this.dataSource.findProductById(this.productId)
+    
       //render HTML with product details
       this.renderProductDetails();
     //add listener to cart button
       document.getElementById("addToCart")
       .addEventListener("click", this.addToCartHandler.bind(this));
+
+    //Code for breadcrumbs (href tags)
+    const breadcrumb_element = document.getElementById("product_page_breadcrumb");
+    breadcrumb_element.href = this.url;
+    const product_category = this.product.Category;
+    document.getElementById("list_page_breadcrumb").href = `../product-listing/index.html?category=${product_category}`;
     }
 
     addProductToCart(product) {

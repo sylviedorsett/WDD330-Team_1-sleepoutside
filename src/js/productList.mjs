@@ -21,6 +21,7 @@ export default class productList {
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
+        this.url = document.URL;
     }
 
     async init() {
@@ -29,7 +30,13 @@ export default class productList {
         this.renderList(productList);
         //set title to current category
         document.querySelector(".title").innerHTML = this.category[0].toUpperCase() + this.category.substring(1)
-    }
+        
+        //Code for breadcrumbs (product quantity in the list)
+        const product_quantity = productList.length;
+        const quantity_element = document.getElementById("quantity");
+        quantity_element.innerHTML = `Product Category > ${product_quantity} items`;
+        quantity_element.href = this.url;
+      }
 
     renderList(productList) {
         renderListWithTemplate(productCardTemplate, this.listElement, productList)
@@ -40,6 +47,6 @@ export default class productList {
       // from the list of all tents/products.
       var randomNum = Math.floor(Math.random() * ((list.length + 1) - 4));
       return list.slice(randomNum, randomNum + 4);
-    }   
-    
+    }
 }
+

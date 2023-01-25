@@ -54,10 +54,10 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  let headerContent = await loadTemplate('/partials/header.html');
-  let footerContent = await loadTemplate('/partials/footer.html');
-  let headerElement = document.querySelector('#header');
-  let footerElement = document.querySelector('#footer');
+  let headerContent = await loadTemplate("/partials/header.html");
+  let footerContent = await loadTemplate("/partials/footer.html");
+  let headerElement = document.querySelector("#header");
+  let footerElement = document.querySelector("#footer");
   renderWithTemplate(headerContent, headerElement);
   renderWithTemplate(footerContent, footerElement);
   showCartQuantity();
@@ -78,3 +78,4 @@ export function showCartQuantity() {
     cartQuantityElement.style.display = "none";
   }
 }
+

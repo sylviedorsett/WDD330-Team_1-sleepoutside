@@ -28,6 +28,7 @@ const order_total = orderTotal(total, tax, shipping);
 
 document.getElementById("subtotal").innerHTML = `$${total}`;
 document.getElementById("tax").innerHTML = `$${tax}`;
+document.getElementById("shipping-estimate").innerHTML = `<strong><em>Please enter your zipcode to calculate shipping and order total.</em></strong>`;
 
 document.getElementById("zipcode").addEventListener("keyup", () => {
     const zip = document.getElementById("zipcode");
@@ -39,5 +40,3 @@ document.getElementById("zipcode").addEventListener("keyup", () => {
     }
 });
 
-
-document.getElementById("shipping-estimate").innerHTML = `<strong><em>Please enter your zipcode to calculate shipping and order total.</em></strong>`;

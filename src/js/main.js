@@ -1,7 +1,6 @@
 // import ProductData from "./ProductData.mjs";
 // import productListing from "./productList.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
-import './sorting.js';
 
 
 // const productListUl = document.querySelector(".product-list");

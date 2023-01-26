@@ -4,7 +4,7 @@ import {
   setLocalStorage,
   renderListWithTemplate,
 } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import { productCardTemplate } from "./productList.mjs";
 
 loadHeaderFooter().then(() => {
@@ -21,7 +21,7 @@ loadHeaderFooter().then(() => {
 
 async function renderProductSearchResult() {
   let searchString = getLocalStorage("search-string").toLowerCase();
-  const dataSource = new ProductData();
+  const dataSource = new ExternalServices();
   const listUl = document.querySelector(".product-list");
   const titleHtml = document.querySelector(".title");
 

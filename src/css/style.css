@@ -266,8 +266,8 @@ button {
   align-items: center;
 }
 .cart-card_delete_btn {
-  padding: .5em 1em;
-  margin-right: .5em;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
 }
 .cart-card__image {
   grid-row: 1/3;
@@ -317,17 +317,16 @@ button {
 .product_img {
   width: 100%;
   margin: auto;
-  display:block;
+  display: block;
 }
 
-@media screen and (max-width:400px) {
-
+@media screen and (max-width: 400px) {
   .cart_img {
-    display:none;
+    display: none;
   }
 
   .cart_img_small_view {
-    display:block;
+    display: block;
     margin: auto;
   }
 }
@@ -339,12 +338,12 @@ button {
 }
 .breadcrumbs_item {
   display: inline-block;
-  color:gray;
+  color: gray;
 }
 
 .breadcrumbs_item:not(:last-of-type)::after {
-  content: '>';
-  margin: 0 .5em;
+  content: ">";
+  margin: 0 0.5em;
   color: gray;
 }
 
@@ -360,6 +359,37 @@ button {
 .breadcrumbs_link:active {
   color: rgb(4, 91, 132);
   font-weight: 500;
+}
+
+/*cart total/checkout container*/
+.hide-total {
+  flex: 1 1 100%;
+  justify-content: space-between;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+}
+.hide-total p {
+  font-size: var(--large-font);
+}
+.hide-total button {
+  margin: 0;
+}
+.hide-total a {
+  text-decoration: none;
+}
+
+.cart-summary {
+  margin: 1em;
+}
+
+/*styles for the form an fieldsets*/
+.fieldset {
+  margin: 1em;
+}
+
+.formbox {
+  margin: 1em;
 }
 
 footer {

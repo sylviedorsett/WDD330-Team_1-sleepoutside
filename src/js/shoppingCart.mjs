@@ -51,21 +51,28 @@ export default class ShoppingCart {
       //else hide the div
       if (cartItems) {
         let sum = 0;
+        sum = sum.toFixed(2);
+        sum = parseFloat(sum);
         //loop through items in so-cart
         //pull list price from array and add to sum
         cartItems.forEach((item) => {
           sum += item.ListPrice;
         });
         //insert sum into html
-        document.getElementsByClassName("hide-total")[0].innerHTML =
+        document.getElementsByClassName("cart-total")[0].innerHTML =
           "Total: $" + sum.toFixed(2);
         //document.querySelector(".cart-total").innerHTML = "Total: $" + sum;
         //unhide element
-        document.querySelector(".hide-total").style.display = "block";
+        document.querySelector(".hide-total").style.display = "flex";
+        setLocalStorage("total", sum);
+        console.log(sum);
+        console.log(typeof sum);
+        
       } else {
         //hide element
         document.querySelector(".hide-total").style.display = "none";
       }
+      
     }
 
     removeProductFromCart(productId) {

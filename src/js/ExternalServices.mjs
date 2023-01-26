@@ -1,4 +1,7 @@
+import {getLocalStorage} from "./utils.mjs";
+
 const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
+const checkoutURL = "http://server-nodejs.cit.byui.edu:3000/checkout";
 let categories = ["tents", "backpacks", "hammocks", "sleeping-bags"];
 
 function convertToJson(res) {
@@ -9,10 +12,28 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   constructor() {
   }
-  
+
+  async checkout(form){
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin":"*"
+      },
+      body: JSON.stringify(form)
+    }
+
+    const response = await fetch(checkoutURL, options);
+    const data = await response.json();
+    //Convert the response to json to be able to see it in the console.
+    console.log(data);
+
+    window.alert(`Order Confirmation: ${data.orderId}`)
+  }
+
   async getData(category) {
     const response = await fetch(baseURL +`products/search/${category}`);
     const data = await convertToJson(response);  

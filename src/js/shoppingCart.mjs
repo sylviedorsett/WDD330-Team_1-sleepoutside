@@ -57,15 +57,18 @@ export default class ShoppingCart {
           sum += item.ListPrice;
         });
         //insert sum into html
-        document.getElementsByClassName("hide-total")[0].innerHTML =
+        document.getElementsByClassName("cart-total")[0].innerHTML =
           "Total: $" + sum.toFixed(2);
         //document.querySelector(".cart-total").innerHTML = "Total: $" + sum;
         //unhide element
-        document.querySelector(".hide-total").style.display = "block";
+        document.querySelector(".hide-total").style.display = "flex";
+        setLocalStorage("total", sum);
+        
       } else {
         //hide element
         document.querySelector(".hide-total").style.display = "none";
       }
+      
     }
 
     removeProductFromCart(productId) {

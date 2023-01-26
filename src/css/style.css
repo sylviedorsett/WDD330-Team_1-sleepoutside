@@ -362,6 +362,35 @@ button {
   font-weight: 500;
 }
 
+/*cart total/checkout container*/
+.hide-total {
+  flex: 1 1 100%;
+  justify-content: space-between;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+}
+.hide-total p {
+  font-size: var(--large-font);
+}
+.hide-total button {
+  margin: 0;
+}
+.hide-total a {
+  text-decoration: none;
+}
+
+/*styles for the form an fieldsets*/
+.fieldset {
+  margin: 1em;
+}
+
+.formbox {
+  margin: 1em;
+}
+
+
+
 footer {
   font-size: var(--small-font);
   padding: 1em;

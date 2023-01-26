@@ -51,6 +51,8 @@ export default class ShoppingCart {
       //else hide the div
       if (cartItems) {
         let sum = 0;
+        sum = sum.toFixed(2);
+        sum = parseFloat(sum);
         //loop through items in so-cart
         //pull list price from array and add to sum
         cartItems.forEach((item) => {
@@ -63,6 +65,8 @@ export default class ShoppingCart {
         //unhide element
         document.querySelector(".hide-total").style.display = "flex";
         setLocalStorage("total", sum);
+        console.log(sum);
+        console.log(typeof sum);
         
       } else {
         //hide element

@@ -56,7 +56,6 @@ const form = document.getElementById("checkout-form");
 form.addEventListener("submit", (e) => {
     e.preventDefault(); 
     const payload = convertFormToJSON(form);
-    console.log(payload);
     service.checkout(payload);
 });
 
@@ -68,7 +67,8 @@ export function convertFormToJSON (form) {
     for (const key of formObject.keys()) {
         jsonObject[key] = formObject.get(key);
     };
-
+    
+    jsonObject["orderDate"] = new Date();
     jsonObject["orderTotal"] = order_total;
     jsonObject["shipping"] = shipping;
     jsonObject["tax"] = tax;

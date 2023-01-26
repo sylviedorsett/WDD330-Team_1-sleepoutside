@@ -2,7 +2,6 @@ import {getLocalStorage} from "./utils.mjs";
 
 const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 const checkoutURL = "http://server-nodejs.cit.byui.edu:3000/checkout";
-//const altURL = "https://alternate-wdd-checkout.onrender.com/checkout";
 let categories = ["tents", "backpacks", "hammocks", "sleeping-bags"];
 
 function convertToJson(res) {
@@ -28,7 +27,11 @@ export default class ExternalServices {
     }
 
     const response = await fetch(checkoutURL, options);
-    console.log(response);
+    const data = await response.json();
+    //Convert the response to json to be able to see it in the console.
+    console.log(data);
+
+    window.alert(`Order Confirmation: ${data.orderId}`)
   }
 
   async getData(category) {

@@ -56,7 +56,8 @@ export default class ShoppingCart {
         //loop through items in so-cart
         //pull list price from array and add to sum
         cartItems.forEach((item) => {
-          sum += item.ListPrice;
+          let quantity = item.Quantity
+          sum += quantity * item.ListPrice;
         });
         //insert sum into html
         document.getElementsByClassName("cart-total")[0].innerHTML =

@@ -15,6 +15,14 @@ export default class ShoppingCart {
       let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
       deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
       
+      // adding update quantity functionality to cart
+      let quantityInputs = document.querySelectorAll(".qty-in-cart");
+      quantityInputs.forEach(item => {item.addEventListener('change', () => {
+        this.updateItemQuantity(cartItems, item.id, item.value);
+        this.renderCartContents();
+        showCartQuantity();
+        this.cartTotal();
+      })})
     }
 
     //function to create template
@@ -34,7 +42,7 @@ export default class ShoppingCart {
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity"><label for="qty">qty: </label><input name="qty" class="qty-in-cart" type="number" step="1" value="${parseInt(item.Quantity)}"></p>
+      <p class="cart-card__quantity"><label for="qty">qty: </label><input name="qty" id="${item.Id}" class="qty-in-cart" type="number" step="1" value="${parseInt(item.Quantity)}"></p>
       <button class="cart-card_delete_btn" value="${item.Id}">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>`;
@@ -92,5 +100,12 @@ export default class ShoppingCart {
       // render the cart again now that the item is removed
       this.renderCartContents();
       showCartQuantity();
+    }
+
+    updateItemQuantity(cart, id, quantity){
+      let Id = id;
+      let itemToUpdate = cart.findIndex(item => item.Id === Id);
+      cart[itemToUpdate].Quantity = parseInt(quantity);
+      setLocalStorage("so-cart", cart);
     }
 }

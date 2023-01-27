@@ -66,8 +66,8 @@ export default class ShoppingCart {
         //unhide element
         document.querySelector(".hide-total").style.display = "flex";
         setLocalStorage("total", sum);
-        console.log(sum);
-        console.log(typeof sum);
+        // console.log(sum);
+        // console.log(typeof sum);
         
       } else {
         //hide element

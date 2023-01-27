@@ -27,18 +27,19 @@ export default class ShoppingCart {
 
     //function to create template
     cartItemTemplate(item) {
+      const productDetailsPage = `../product_pages/index.html?product=${item.Id}`;
       const newItem = `<img class="cart_img_small_view"
       src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
       <li class="cart-card divider">
-      <a href="#" class="cart-card__image">
+      <a href="${productDetailsPage}" class="cart-card__image">
         <img class="cart_img"
           src="${item.Images.PrimaryMedium}"
           alt="${item.Name}"
         />
       </a>
-      <a href="#">
+      <a href="${productDetailsPage}">
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>

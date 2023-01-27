@@ -34,7 +34,7 @@ export default class ShoppingCart {
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: ${item.Quantity}</p>
+      <p class="cart-card__quantity"><label for="qty">qty: </label><input name="qty" class="qty-in-cart" type="number" step="1" value="${parseInt(item.Quantity)}"></p>
       <button class="cart-card_delete_btn" value="${item.Id}">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>`;

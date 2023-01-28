@@ -4,15 +4,15 @@ class Alert {
     this.alertList.classList.add("alert-list");
   }
 
-  async fetchAlerts() {
-    const response = await fetch("/json/alert.json");
+  async fetchAlerts(alertFile) {
+    const response = await fetch(alertFile);
     const json = await response.json();
     return json;
   }
 
   // constructor and fetchAlerts method
-  async create() {
-    const alerts = await this.fetchAlerts();
+  async create(alertFile) {
+    const alerts = await this.fetchAlerts(alertFile);
     alerts.alerts.forEach((alert) => {
       let alertItem = document.createElement("p");
       alertItem.innerHTML = alert.message;
@@ -30,4 +30,4 @@ class Alert {
 
 // export default Alert;
 const newAlerts = new Alert();
-newAlerts.create();
+newAlerts.create("/json/alert.json");

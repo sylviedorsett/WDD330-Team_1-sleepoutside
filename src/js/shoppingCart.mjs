@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage, showCartQuantity } from "./utils.mjs"; 
+// import Alert from "./alert.mjs"
 
 export default class ShoppingCart {
     constructor(key, parentSelector) {
@@ -9,19 +10,27 @@ export default class ShoppingCart {
     renderCartContents() {
       const cartItems = getLocalStorage("so-cart");
       const htmlItems = cartItems.map((item) => this.cartItemTemplate(item));
+      
+
     
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
       this.cartTotal();
       let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
       deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
       
-      // adding update quantity functionality to cart
+      // adding update quantity functionality to our cart
       let quantityInputs = document.querySelectorAll(".qty-in-cart");
       quantityInputs.forEach(item => {item.addEventListener('change', () => {
-        this.updateItemQuantity(cartItems, item.id, item.value);
-        this.renderCartContents();
-        showCartQuantity();
-        this.cartTotal();
+        if(item.value  >= 1){
+          this.updateItemQuantity(cartItems, item.id, item.value);
+          this.renderCartContents();
+          showCartQuantity();
+          this.cartTotal();
+        } else {
+          this.renderCartContents();
+          alert("Please use the delete button to delete an item.")
+          // Alert.create("../public/json/alert-quantityInCartError.json")
+        }
       })})
     }
 
@@ -43,7 +52,7 @@ export default class ShoppingCart {
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity"><label for="qty">qty: </label><input name="qty" id="${item.Id}" class="qty-in-cart" type="number" step="1" value="${parseInt(item.Quantity)}"></p>
+      <p class="cart-card__quantity"><label for="qty">qty: </label><input name="qty" id="${item.Id}" class="qty-in-cart" type="number" step="1" pattern="^[2-9]|[1-9][0-9]+$" value="${parseInt(item.Quantity)}"></p>
       <button class="cart-card_delete_btn" value="${item.Id}">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>`;

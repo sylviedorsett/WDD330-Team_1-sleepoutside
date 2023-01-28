@@ -1,4 +1,4 @@
-import {setLocalStorage, getLocalStorage, showCartQuantity} from "./utils.mjs";
+import {setLocalStorage, getLocalStorage, showCartQuantity, alertMessage} from "./utils.mjs";
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -43,6 +43,7 @@ export default class ProductDetails {
         cart[originalItemAdded].Quantity = item["newQunatity"];
       }
       setLocalStorage("so-cart", cart);
+      alertMessage("An item was successfully added to your cart.")
     }
 
     handleQuantity(product, cart){

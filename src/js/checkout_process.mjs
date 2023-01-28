@@ -1,4 +1,4 @@
-import { getLocalStorage} from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage} from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 
@@ -55,12 +55,12 @@ document.getElementById("zipcode").addEventListener("keyup", () => {
 const form = document.getElementById("checkout-form");
 form.addEventListener("submit", (e) => {
     e.preventDefault(); 
-    const payload = convertFormToJSON(form);
-    service.checkout(payload);
+    convertFormToJSON(form);
 });
 
+
 //A Function that makes a new FormData Object for the form 
-export function convertFormToJSON (form) {
+export async function convertFormToJSON (form) {
     let formObject = new FormData(form);
     let jsonObject = {};
     
@@ -73,8 +73,19 @@ export function convertFormToJSON (form) {
     jsonObject["shipping"] = shipping;
     jsonObject["tax"] = tax;
     jsonObject["items"] = packageForm(jsonObject);
-    
-    return jsonObject;
+
+      //process error handling => catch errors sent back from server
+    try {
+        const res = await service.checkout(jsonObject);
+        console.log(res);
+        setLocalStorage("so-cart", []);
+        location.assign("/checkout/success.html");
+    }
+    catch(err) {
+        const alerts = document.querySelectorAll(".alert");
+        alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+        alertMessage(err.message);
+    }
 };
 
 

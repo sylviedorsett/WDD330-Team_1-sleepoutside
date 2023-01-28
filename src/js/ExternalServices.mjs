@@ -1,19 +1,19 @@
-// import {getLocalStorage} from "./utils.mjs";
-
 const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 const checkoutURL = "http://server-nodejs.cit.byui.edu:3000/checkout";
 let categories = ["tents", "backpacks", "hammocks", "sleeping-bags"];
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const data = await res.json();
   if (res.ok) {
-    return res.json();
+    return data;
   } else {
-    throw new Error("Bad Response");
+    throw {name: "servicesError", message: data};
   }
 }
 
 export default class ExternalServices {
   constructor() {
+
   }
 
   async checkout(form){
@@ -26,12 +26,10 @@ export default class ExternalServices {
       body: JSON.stringify(form)
     }
 
-    const response = await fetch(checkoutURL, options);
-    const data = await response.json();
+    const response = await fetch(checkoutURL, options).then(convertToJson);
+    window.alert(response.orderId);
     //Convert the response to json to be able to see it in the console.
-    // console.log(data);
-
-    window.alert(`Order Confirmation: ${data.orderId}`)
+    return response;
   }
 
   async getData(category) {

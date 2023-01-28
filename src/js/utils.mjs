@@ -72,7 +72,11 @@ export function showCartQuantity() {
   // Set the superscript to the number of items in the cart 'IF'
   // there is an item in the cart.
   if (new_cart) {
-    cartQuantityElement.textContent = new_cart.length;
+    let quantity = 0;
+    for (let i in new_cart){
+      quantity += new_cart[i].Quantity;
+    }
+    cartQuantityElement.textContent = quantity;
     cartQuantityElement.style.display = "block";
   } else {
     cartQuantityElement.style.display = "none";

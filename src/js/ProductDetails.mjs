@@ -30,8 +30,40 @@ export default class ProductDetails {
       if (cart === null) {
         cart = [];
       }
-      cart.push(product);
+      // adding functionality for quantity
+      let item = this.handleQuantity(product, cart);
+      // console.log("2.", typeof product, product);
+      // pushing item to cart
+      if(item["newItem"]){
+        cart.push(product);
+      } else {
+        // let soCart = JSON.parse(localStorage.getItem("so-cart"));
+        let Id = product.Id;
+        let originalItemAdded = cart.findIndex(item => item.Id === Id);
+        cart[originalItemAdded].Quantity = item["newQunatity"];
+      }
       setLocalStorage("so-cart", cart);
+    }
+
+    handleQuantity(product, cart){
+      let newItem = true;
+      let newQuantity = {"Quantity": 0};
+      for(let i in cart) {
+        // console.log("3.", cart[i]);
+        if(cart[i].Id === product.Id){
+          // console.log("5. ", cart[i].Quantity, typeof product.Quantity, product.Quantity);
+          cart[i].Quantity = parseInt(cart[i].Quantity) + 1;
+          newQuantity = cart[i].Quantity;
+          // console.log("4. ", cart[i].Id, product.Id, typeof cart[i].Quantity, cart[i].Quantity, typeof product.Quantity, product.Quantity);
+          newItem = false;
+          break;
+        }
+      }
+      if(newItem) {
+        product.Quantity = 1;
+      }
+      // console.log("1.", typeof product.Quantity, product.Quantity);
+      return {"newItem" : newItem, "newQunatity" : newQuantity};
     }
 
     async addToCartHandler(e) {

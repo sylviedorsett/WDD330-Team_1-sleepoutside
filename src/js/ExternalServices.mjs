@@ -1,4 +1,4 @@
-import {getLocalStorage} from "./utils.mjs";
+// import {getLocalStorage} from "./utils.mjs";
 
 const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 const checkoutURL = "http://server-nodejs.cit.byui.edu:3000/checkout";
@@ -29,7 +29,7 @@ export default class ExternalServices {
     const response = await fetch(checkoutURL, options);
     const data = await response.json();
     //Convert the response to json to be able to see it in the console.
-    console.log(data);
+    // console.log(data);
 
     window.alert(`Order Confirmation: ${data.orderId}`)
   }

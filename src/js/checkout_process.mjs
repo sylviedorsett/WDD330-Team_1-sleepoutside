@@ -77,17 +77,18 @@ export async function convertFormToJSON (form) {
       //process error handling => catch errors sent back from server
     try {
         const res = await service.checkout(jsonObject);
-        console.log(res);
+        //console.log(res);
         setLocalStorage("so-cart", []);
         setLocalStorage("order-id", res.orderId);
+    
         location.assign("/checkout/success.html");
-        //const id = getLocalStorage("order-id");
-        //document.getElementById("confirmation-No").innerHTML = `Your order was submitted. Your confirmation number is: ${id}`;
-    }
+        }
     catch(err) {
+        //remove alerts
         const alerts = document.querySelectorAll(".alert");
         alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
-        alertMessage(err.message);
+        //display errors
+        alertMessage(err.message); 
     }
 };
 

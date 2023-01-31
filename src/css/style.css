@@ -452,6 +452,27 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
   margin: 1em;
 }
 
+.checkout-button a {
+  text-decoration: none;
+}
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: blue;
+ 
+}
+.alert p {
+  margin: 0;
+}
+
+.alert span {
+  margin-right: 1em;
+  background-color: var(--dark-grey);
+  padding: 0 .5em;
+}
+
 footer {
   font-size: var(--small-font);
   padding: 1em;

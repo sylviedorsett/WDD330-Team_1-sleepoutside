@@ -461,7 +461,6 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
   justify-content: space-between;
   color: white;
   background-color: blue;
- 
 }
 .alert p {
   margin: 0;
@@ -470,7 +469,7 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
 .alert span {
   margin-right: 1em;
   background-color: var(--dark-grey);
-  padding: 0 .5em;
+  padding: 0 0.5em;
 }
 
 footer {

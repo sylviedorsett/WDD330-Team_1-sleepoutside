@@ -21,9 +21,14 @@
     </ul>
     <main class="divider">
       <h1>Order Complete</h1>
-      <p id="confirmation-No">Your order was submitted.</p>
+      <p>Your order is complete.</p>
+      <p id="confirmation-No">Your confirmation number is: </p>
     </main>
 
     <footer id="footer"></footer>
+    <script>
+      const id = getLocalStorage("order-id");
+      document.getElementById("confirmation-No").innerHTML = `Your confirmation number is: ${id}`;
+    </script>
   </body>
 </html>

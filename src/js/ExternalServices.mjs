@@ -1,3 +1,5 @@
+import { setLocalStorage } from "./utils.mjs";
+
 const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 const checkoutURL = "http://server-nodejs.cit.byui.edu:3000/checkout";
 let categories = ["tents", "backpacks", "hammocks", "sleeping-bags"];
@@ -27,7 +29,7 @@ export default class ExternalServices {
     }
 
     const response = await fetch(checkoutURL, options).then(convertToJson);
-    window.alert(response.orderId);
+    //window.alert(response.orderId);
     //Convert the response to json to be able to see it in the console.
     return response;
   }

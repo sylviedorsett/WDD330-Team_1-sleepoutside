@@ -79,7 +79,10 @@ export async function convertFormToJSON (form) {
         const res = await service.checkout(jsonObject);
         console.log(res);
         setLocalStorage("so-cart", []);
+        setLocalStorage("order-id", res.orderId);
         location.assign("/checkout/success.html");
+        //const id = getLocalStorage("order-id");
+        //document.getElementById("confirmation-No").innerHTML = `Your order was submitted. Your confirmation number is: ${id}`;
     }
     catch(err) {
         const alerts = document.querySelectorAll(".alert");
@@ -97,3 +100,6 @@ export function packageForm(myObject) {
     } 
     return myObject;
 }
+
+    
+    
